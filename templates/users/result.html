@@ -1,0 +1,43 @@
+{% extends 'users/user_base.html' %}
+{% block title %}Quiz Results - QuizGenix{% endblock %}
+{% block content %}
+<section class="py-16">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-4xl font-extrabold text-center mb-8 animate-fadeInLeft text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-indigo-500">
+      Your Quiz Results
+    </h2>
+    <div class="bg-gray-800 bg-opacity-85 p-8 rounded-2xl shadow-xl animate-fadeInLeft mb-8" style="animation-delay: 0.1s;">
+      <p class="text-2xl font-semibold text-center text-gray-200">
+        You scored: <span class="text-teal-400">{{ score }}</span> / <span class="text-teal-400">{{ total }}</span>
+      </p>
+    </div>
+    {% for r in results %}
+      <div class="bg-gray-800 bg-opacity-85 p-6 rounded-2xl shadow-xl mb-6 animate-fadeInLeft" style="animation-delay: {{ forloop.counter0|add:0.2 }}s;">
+        <p class="text-xl font-semibold text-gray-200 mb-3">
+          Q{{ forloop.counter }}: {{ r.question }}
+        </p>
+        <p class="text-base text-gray-300 mb-2">
+          Your Answer: {{ r.user_answer }}
+          {% if r.is_correct %}
+            <span class="text-teal-400">✔</span>
+          {% else %}
+            <span class="text-red-400">✖</span>
+          {% endif %}
+        </p>
+        <p class="text-base text-gray-300">
+          Correct Answer: {{ r.correct_answer }}
+          <span class="text-teal-400">✔</span>
+        </p>
+      </div>
+    {% endfor %}
+    <div class="text-center mt-8">
+      <a href="{% url 'upload_pdf' %}" class="inline-block btn-gradient text-white font-semibold px-8 py-3 rounded-full text-lg transition duration-300 ease-in-out hover-pulseGlow animate-fadeInLeft" style="animation-delay: 0.3s;">
+        Create Another Quiz
+      </a>
+      <a href="{% url 'user_homepage' %}" class="inline-block bg-gray-700 hover:bg-gray-600 text-white font-semibold px-8 py-3 rounded-full text-lg transition duration-300 ease-in-out hover-pulseGlow animate-fadeInLeft ml-4" style="animation-delay: 0.4s;">
+        Back to Home
+      </a>
+    </div>
+  </div>
+</section>
+{% endblock %}

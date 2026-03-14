@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit User Details</title>
+</head>
+<body>
+    <h2>Edit User Details</h2>
+
+    {% if msg %}
+    <p style="color:green;">{{ msg }}</p>
+    {% endif %}
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label>Name:</label><br>
+        <input type="text" name="name" value="{{ user.name }}" required><br><br>
+
+        <label>Email:</label><br>
+        <input type="email" name="mail" value="{{ user.mail }}" required><br><br>
+
+        <label>Mobile:</label><br>
+        <input type="text" name="mobile" value="{{ user.mobile }}" required><br><br>
+
+        <label>Current Image:</label><br>
+        <img src="{{ user.image.url }}" alt="User Image" width="120" height="120"><br><br>
+
+        <label>Change Image:</label><br>
+        <input type="file" name="image"><br><br>
+
+        <button type="submit">Update User</button>
+    </form>
+
+    <p><a href="{% url 'admin_dashboard' %}">Back to Admin Dashboard</a></p>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Home - QuizGenix</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Custom Animations */
+    @keyframes fadeInDown {
+      from {
+        transform: translateY(-20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 5px rgba(45, 212, 191, 0.3); }
+      50% { box-shadow: 0 0 15px rgba(45, 212, 191, 0.7); }
+      100% { box-shadow: 0 0 5px rgba(45, 212, 191, 0.3); }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .animate-fadeInDown {
+      animation: fadeInDown 0.7s ease-out forwards;
+    }
+
+    .hover-pulseGlow:hover {
+      animation: pulseGlow 1s ease-in-out infinite;
+    }
+
+    .hover-bounce:hover {
+      animation: bounce 0.4s ease-in-out;
+    }
+
+    .nav-link {
+      position: relative;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -3px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(to right, #F87171, #6366F1);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::before {
+      width: 80%;
+    }
+
+    .nav-link:hover {
+      color: #F87171;
+      transform: scale(1.05);
+    }
+
+    .gradient-bg {
+      background: linear-gradient(145deg, #111827 0%, #374151 100%);
+    }
+
+    .btn-gradient {
+      background: linear-gradient(90deg, #F87171, #6366F1);
+      transition: background 0.4s ease, transform 0.3s ease;
+    }
+
+    .btn-gradient:hover {
+      background: linear-gradient(90deg, #6366F1, #F87171);
+      transform: translateY(-3px);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col gradient-bg text-white font-sans">
+  <!-- Navbar -->
+  <nav class="bg-gray-900 bg-opacity-90 backdrop-blur-lg sticky top-0 z-50 shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <!-- Logo -->
+        <div class="flex-shrink-0">
+          <a href="#" class="text-2xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-indigo-500">
+            QuizGenix
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </nav>
+
+  <!-- Admin Home Section -->
+  <section class="flex-grow flex items-center justify-center py-16">
+    <div class="max-w-lg w-full mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-5xl font-extrabold mb-6 animate-fadeInDown text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-indigo-500">
+        Welcome Admin!
+      </h1>
+      <p class="text-lg text-gray-300 mb-8 animate-fadeInDown" style="animation-delay: 0.1s;">
+        Manage your quiz platform with ease. Access the dashboard to oversee users, quizzes, and more.
+      </p>
+      <div class="space-y-4">
+        <a href="{% url 'admin_dashboard' %}" class="inline-block btn-gradient text-white font-semibold px-8 py-3 rounded-full text-lg transition duration-300 ease-in-out hover-pulseGlow animate-fadeInDown" style="animation-delay: 0.2s;">
+          Go to Dashboard
+        </a>
+        <a href="{% url 'user_logout' %}" class="inline-block bg-gray-700 hover:bg-gray-600 text-white font-semibold px-8 py-3 rounded-full text-lg transition duration-300 ease-in-out hover-pulseGlow animate-fadeInDown" style="animation-delay: 0.3s;">
+          Logout
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 py-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
+      <p>© 2025 QuizGenix. All rights reserved|Saikumar Velmula</p>
+    </div>
+  </footer>
+</body>
+</html>

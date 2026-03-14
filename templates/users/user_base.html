@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}User Panel - QuizGenix{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Custom Animations */
+    @keyframes fadeInLeft {
+      from {
+        transform: translateX(-20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 5px rgba(45, 212, 191, 0.3); }
+      50% { box-shadow: 0 0 15px rgba(45, 212, 191, 0.7); }
+      100% { box-shadow: 0 0 5px rgba(45, 212, 191, 0.3); }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .animate-fadeInLeft {
+      animation: fadeInLeft 0.7s ease-out forwards;
+    }
+
+    .hover-pulseGlow:hover {
+      animation: pulseGlow 1s ease-in-out infinite;
+    }
+
+    .hover-bounce:hover {
+      animation: bounce 0.4s ease-in-out;
+    }
+
+    .nav-link {
+      position: relative;
+      transition: color 0.3s ease, background-color 0.3s ease;
+    }
+
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 100%;
+      left: 0;
+      background: linear-gradient(to right, #F87171, #6366F1);
+      transition: width 0.3s ease;
+      z-index: -1;
+    }
+
+    .nav-link:hover::before {
+      width: 100%;
+    }
+
+    .nav-link:hover {
+      color: #fff;
+    }
+
+    .gradient-bg {
+      background: linear-gradient(145deg, #111827 0%, #374151 100%);
+    }
+
+    .btn-gradient {
+      background: linear-gradient(90deg, #F87171, #6366F1);
+      transition: background 0.4s ease, transform 0.3s ease;
+    }
+
+    .btn-gradient:hover {
+      background: linear-gradient(90deg, #6366F1, #F87171);
+      transform: translateY(-3px);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex gradient-bg text-white font-sans">
+  <!-- Sidebar Navigation -->
+  <aside class="w-64 bg-gray-900 bg-opacity-90 h-screen sticky top-0 p-6 shadow-lg">
+
+    <nav class="space-y-4">
+      <a href="{% url 'user_homepage' %}" class="nav-link flex items-center space-x-2 text-gray-300 hover:text-white px-4 py-3 rounded-lg text-sm font-medium hover-bounce animate-fadeInLeft" style="animation-delay: 0.4s;">
+        <span>🏠</span><span>Home</span>
+      </a>
+      <a href="{% url 'overview' %}" class="nav-link flex items-center space-x-2 text-gray-300 hover:text-white px-4 py-3 rounded-lg text-sm font-medium hover-bounce animate-fadeInLeft" style="animation-delay: 0.5s;">
+        <span>📊</span><span>Project Overview</span>
+      </a>
+      <a href="{% url 'upload_pdf' %}" class="nav-link flex items-center space-x-2 text-gray-300 hover:text-white px-4 py-3 rounded-lg text-sm font-medium hover-bounce animate-fadeInLeft" style="animation-delay: 0.6s;">
+        <span>📄</span><span>Let’s Create Quiz!</span>
+      </a>
+      <a href="{% url 'user_logout' %}" class="nav-link flex items-center space-x-2 text-gray-300 hover:text-white px-4 py-3 rounded-lg text-sm font-medium hover-bounce animate-fadeInLeft" style="animation-delay: 0.7s;">
+        <span>🚪</span><span>Logout</span>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-grow p-6">
+    <div class="max-w-7xl mx-auto">
+      {% block content %}
+      {% endblock %}
+    </div>
+  </main>
+</body>
+</html>
